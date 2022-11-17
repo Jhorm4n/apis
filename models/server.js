@@ -8,6 +8,7 @@ class Server {
     this.usuariosPath = "/api/usuario";
     this.librosPath = "/api/libros";
     this.asigSancionesPath = "/api/asigSancion";
+    this.reservasPath = "/api/reservas";
     this.middlewares();
     this.routes();
     this.dbConectar(); //Metodo conectar 
@@ -29,6 +30,7 @@ class Server {
     this.app.use(this.usuariosPath, require("../routes/usuario"));
     this.app.use(this.librosPath, require("../routes/libros"));
     this.app.use(this.asigSancionesPath, require("../routes/asigSancion"));
+    this.app.use(this.reservasPath, require("../routes/reservas"));
   }
   listen() {
     this.app.listen(this.port, () => {
