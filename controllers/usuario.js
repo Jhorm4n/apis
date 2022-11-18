@@ -32,7 +32,40 @@ const postUsuario = async (req,res) => {
 
     })
 }
+const deleteUsuario = async(req,res) =>{
+    const { documento } = req.query
+    const usuario = await Usuario.findOneAndDelete({documento : documento})
+    
+    res.json({
+        msg: 'DELETE API Usuario',
+        usuario
+    })
+
+}
+
+const putUsuario = async(req,res) =>{
+    const {documento,documentoNuevo,nombre,correo} = req.body
+
+    const libro = await Libro.findOneAndUpdate({documento:documento},{ documento:documentoNuevo,nombre: nombre, correo : correo})
+
+    res.json({
+        msg: 'UPDATE API Libro',
+        libro
+    })
+}
+
+const patchUsuario = async(req, res) =>{
+    const {documento,nombre} = req.body
+    const usuario = await Usuario.findOneAndUpdate({documento:documento},{nombre: nombre})
+    res.json({
+            msg: 'PATCH API Libro',
+            usuario
+        })
+}
 module.exports = {
     getUsuario,
-    postUsuario
+    postUsuario,
+    deleteUsuario,
+    putUsuario,
+    patchUsuario
 }
